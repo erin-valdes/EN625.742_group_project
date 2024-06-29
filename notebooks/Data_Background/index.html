@@ -1,0 +1,1009 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Data_Analysis/">
+      
+      
+        <link rel="next" href="../Setup/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
+    
+    
+      
+        <title>Data Background - Jupyter to Github pages action demo</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6543a935.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-background" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Jupyter to Github pages action demo" class="md-header__button md-logo" aria-label="Jupyter to Github pages action demo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Jupyter to Github pages action demo
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data Background
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Jupyter to Github pages action demo" class="md-nav__button md-logo" aria-label="Jupyter to Github pages action demo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Jupyter to Github pages action demo
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../home/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Notebooks
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Notebooks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Data_Analysis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Analysis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Data Background
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Environment Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="data-background">Data Background</h1>
+<p>Asteroid data - Near earth objects </p>
+<p>Add more info here on data </p>
+<h1 id="data-collection">Data Collection</h1>
+<p>Data Source: </p>
+<p>Solar System Dynamics. 29 June 2024. Small-Body Database Query. https://ssd.jpl.nasa.gov”</p>
+<h3 id="constraints">Constraints</h3>
+<p><strong>object group:</strong> NEOs</p>
+<p><strong>object class:</strong> asteroids</p>
+<h1 id="data-dictionary">Data Dictionary</h1>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th style="text-align: center;">Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>spkid</td>
+<td style="text-align: center;">string</td>
+<td>primary SPK-ID</td>
+</tr>
+<tr>
+<td>full_name</td>
+<td style="text-align: center;">string</td>
+<td>full designation (and name)</td>
+</tr>
+<tr>
+<td>pdes</td>
+<td style="text-align: center;">string</td>
+<td>primary designation (for numbered asteroids, this is the IAU number); examples: 433, 2016 B1, 1999 AN10</td>
+</tr>
+<tr>
+<td>name</td>
+<td style="text-align: center;">string</td>
+<td>IAU name (if any); examples: Ceres, Halley, d'Arrest</td>
+</tr>
+<tr>
+<td>class</td>
+<td style="text-align: center;">string</td>
+<td>orbit classification code</td>
+</tr>
+<tr>
+<td>neo</td>
+<td style="text-align: center;">boolean</td>
+<td>flag indicating the object is an NEO (Y or N)</td>
+</tr>
+<tr>
+<td>pha</td>
+<td style="text-align: center;">boolean</td>
+<td>flag indicating the object is a PHA (Y or N)</td>
+</tr>
+<tr>
+<td>t_jup</td>
+<td style="text-align: center;">number</td>
+<td>Jupiter Tisserand parameter</td>
+</tr>
+<tr>
+<td>moid</td>
+<td style="text-align: center;">number</td>
+<td>minimum distance between the orbits of Earth and the small-body (au); use moid_ld for units in lunar distances (LD)</td>
+</tr>
+<tr>
+<td>moid_jup</td>
+<td style="text-align: center;">number</td>
+<td>minimum distance between the orbits of Jupiter and the small-body (au)</td>
+</tr>
+<tr>
+<td>orbit_id</td>
+<td style="text-align: center;">string</td>
+<td>orbit solution ID</td>
+</tr>
+<tr>
+<td>epoch</td>
+<td style="text-align: center;">number</td>
+<td>epoch of osculation in Julian day form (TDB); use epoch_mjd for modified Julian day form; use epoch_cal for calendar form YYYY-MM-DD.D</td>
+</tr>
+<tr>
+<td>equinox</td>
+<td style="text-align: center;">string</td>
+<td>equinox of reference frame (e.g., J2000)</td>
+</tr>
+<tr>
+<td>e</td>
+<td style="text-align: center;">number</td>
+<td>eccentricity</td>
+</tr>
+<tr>
+<td>a</td>
+<td style="text-align: center;">number</td>
+<td>semimajor axis (au)</td>
+</tr>
+<tr>
+<td>q</td>
+<td style="text-align: center;">number</td>
+<td>perihelion distance (au)</td>
+</tr>
+<tr>
+<td>i</td>
+<td style="text-align: center;">number</td>
+<td>inclination (deg)</td>
+</tr>
+<tr>
+<td>om</td>
+<td style="text-align: center;">number</td>
+<td>longitude of the ascending node (deg)</td>
+</tr>
+<tr>
+<td>w</td>
+<td style="text-align: center;">number</td>
+<td>argument of perihelion (deg)</td>
+</tr>
+<tr>
+<td>ma</td>
+<td style="text-align: center;">number</td>
+<td>mean anomaly (deg)</td>
+</tr>
+<tr>
+<td>tp</td>
+<td style="text-align: center;">number</td>
+<td>time of perihelion passage in Julian day form (TDB); use tp_cal for calendar form YYYY-MM-DD.D</td>
+</tr>
+<tr>
+<td>per</td>
+<td style="text-align: center;">number</td>
+<td>orbital period (d); use per_y for orbital period in Julian years (y)</td>
+</tr>
+<tr>
+<td>n</td>
+<td style="text-align: center;">number</td>
+<td>mean motion (deg/d)</td>
+</tr>
+<tr>
+<td>ad</td>
+<td style="text-align: center;">number</td>
+<td>aphelion distance (au)</td>
+</tr>
+<tr>
+<td>sigma_e</td>
+<td style="text-align: center;">number</td>
+<td>1-sigma uncertainty in the eccentricity</td>
+</tr>
+<tr>
+<td>sigma_a</td>
+<td style="text-align: center;">number</td>
+<td>1-sigma uncertainty in the semimajor axis (au)</td>
+</tr>
+<tr>
+<td>sigma_q</td>
+<td style="text-align: center;">number</td>
+<td>1-sigma uncertainty in the perihelion distance (au)</td>
+</tr>
+<tr>
+<td>sigma_i</td>
+<td style="text-align: center;">number</td>
+<td>1-sigma uncertainty in the inclination (deg)</td>
+</tr>
+<tr>
+<td>sigma_om</td>
+<td style="text-align: center;">number</td>
+<td>1-sigma uncertainty in the longitude of the ascending node (deg)</td>
+</tr>
+<tr>
+<td>sigma_w</td>
+<td style="text-align: center;">number</td>
+<td>1-sigma uncertainty in the argument of perihelion (deg)</td>
+</tr>
+<tr>
+<td>sigma_tp</td>
+<td style="text-align: center;">number</td>
+<td>1-sigma uncertainty in the time of perihelion passage (d)</td>
+</tr>
+<tr>
+<td>sigma_ma</td>
+<td style="text-align: center;">number</td>
+<td>1-sigma uncertainty in the mean anomaly (deg)</td>
+</tr>
+<tr>
+<td>sigma_per</td>
+<td style="text-align: center;">number</td>
+<td>1-sigma uncertainty in the period (d)</td>
+</tr>
+<tr>
+<td>sigma_n</td>
+<td style="text-align: center;">number</td>
+<td>1-sigma uncertainty in the mean motion (deg/d)</td>
+</tr>
+<tr>
+<td>sigma_ad</td>
+<td style="text-align: center;">number</td>
+<td>1-sigma uncertainty in the aphelion distance (au)</td>
+</tr>
+<tr>
+<td>producer</td>
+<td style="text-align: center;">string</td>
+<td>name of the person or institution responsible for the orbit determination</td>
+</tr>
+<tr>
+<td>data_arc</td>
+<td style="text-align: center;">number</td>
+<td>number of days spanned by the observations used in the orbit determination</td>
+</tr>
+<tr>
+<td>first_obs</td>
+<td style="text-align: center;">string</td>
+<td>date of the first observation used in the orbit (YYYY-MM-DD or YYYY-??-?? when only the year is known)</td>
+</tr>
+<tr>
+<td>last_obs</td>
+<td style="text-align: center;">string</td>
+<td>date of the last observation used in the orbit (YYYY-MM-DD or YYYY-??-?? when only the year is known)</td>
+</tr>
+<tr>
+<td>n_obs_used</td>
+<td style="text-align: center;">number</td>
+<td>total number of observations of all types used in the orbit</td>
+</tr>
+<tr>
+<td>n_del_obs_used</td>
+<td style="text-align: center;">number</td>
+<td>number of radar delay observations used in the orbit</td>
+</tr>
+<tr>
+<td>n_dop_obs_used</td>
+<td style="text-align: center;">number</td>
+<td>number of radar Doppler observations used in the orbit</td>
+</tr>
+<tr>
+<td>two_body</td>
+<td style="text-align: center;">string</td>
+<td>flag indicating a low-precision 2-body dynamic model was used in the OD</td>
+</tr>
+<tr>
+<td>condition_code</td>
+<td style="text-align: center;">string</td>
+<td>MPC “U” parameter: orbit uncertainty estimate 0-9, with 0 being good, and 9 being highly uncertain</td>
+</tr>
+<tr>
+<td>rms</td>
+<td style="text-align: center;">number</td>
+<td>normalized RMS of the observation fit in the OD</td>
+</tr>
+<tr>
+<td>A1</td>
+<td style="text-align: center;">number</td>
+<td></td>
+</tr>
+<tr>
+<td>A2</td>
+<td style="text-align: center;">number</td>
+<td></td>
+</tr>
+<tr>
+<td>A3</td>
+<td style="text-align: center;">number</td>
+<td></td>
+</tr>
+<tr>
+<td>DT</td>
+<td style="text-align: center;">number</td>
+<td></td>
+</tr>
+<tr>
+<td>A1_sigma</td>
+<td style="text-align: center;">number</td>
+<td></td>
+</tr>
+<tr>
+<td>A2_sigma</td>
+<td style="text-align: center;">number</td>
+<td></td>
+</tr>
+<tr>
+<td>A3_sigma</td>
+<td style="text-align: center;">number</td>
+<td></td>
+</tr>
+<tr>
+<td>DT_sigma</td>
+<td style="text-align: center;">number</td>
+<td></td>
+</tr>
+<tr>
+<td>H</td>
+<td style="text-align: center;">number</td>
+<td>absolute magnitude (magnitude at 1 au from the Sun and the observer)</td>
+</tr>
+<tr>
+<td>G</td>
+<td style="text-align: center;">number</td>
+<td>magnitude slope parameter used in the standard asteroid H/G magnitude law</td>
+</tr>
+<tr>
+<td>H_sigma</td>
+<td style="text-align: center;">number</td>
+<td></td>
+</tr>
+<tr>
+<td>diameter</td>
+<td style="text-align: center;">number</td>
+<td>effective body diameter (km)</td>
+</tr>
+<tr>
+<td>extent</td>
+<td style="text-align: center;">string</td>
+<td>tri(or bi)-axial body dimensions (km)</td>
+</tr>
+<tr>
+<td>GM</td>
+<td style="text-align: center;">number</td>
+<td>mass expressed as a product of the mass “M” and gravitational constant “G” (km3/s2)</td>
+</tr>
+<tr>
+<td>rot_per</td>
+<td style="text-align: center;">number</td>
+<td>body rotation period (synodic) (h)</td>
+</tr>
+<tr>
+<td>albedo</td>
+<td style="text-align: center;">number</td>
+<td>geometric albedo</td>
+</tr>
+<tr>
+<td>BV</td>
+<td style="text-align: center;">number</td>
+<td>color index B-V</td>
+</tr>
+<tr>
+<td>UB</td>
+<td style="text-align: center;">number</td>
+<td>color index U-B</td>
+</tr>
+<tr>
+<td>IR</td>
+<td style="text-align: center;">number</td>
+<td>color index I-R</td>
+</tr>
+<tr>
+<td>spec_T</td>
+<td style="text-align: center;">string</td>
+<td>Tholen spectral taxonomic classification</td>
+</tr>
+<tr>
+<td>spec_B</td>
+<td style="text-align: center;">string</td>
+<td>SMASSII spectral taxonomic classification</td>
+</tr>
+<tr>
+<td>diameter_sigma</td>
+<td style="text-align: center;">number</td>
+<td>1-sigma formal (or estimated) uncertainty in diameter</td>
+</tr>
+<tr>
+<td>### Object Class Codes</td>
+<td style="text-align: center;"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Code</th>
+<th>Name</th>
+<th style="text-align: center;">Kind</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">IEO</td>
+<td>Atira</td>
+<td style="text-align: center;">asteroid</td>
+<td>An asteroid orbit contained entirely within the orbit of the Earth (Q &lt; 0.983 au). Also known as an Interior Earth Object</td>
+</tr>
+<tr>
+<td style="text-align: center;">ATE</td>
+<td>Aten</td>
+<td style="text-align: center;">asteroid</td>
+<td>Near-Earth asteroid orbits similar to that of 2062 Aten (a &lt; 1.0 au; Q &gt; 0.983 au)</td>
+</tr>
+<tr>
+<td style="text-align: center;">APO</td>
+<td>Apollo</td>
+<td style="text-align: center;">asteroid</td>
+<td>Near-Earth asteroid orbits which cross the Earth’s orbit similar to that of 1862 Apollo (a &gt; 1.0 au; q &lt; 1.017 au)</td>
+</tr>
+<tr>
+<td style="text-align: center;">AMO</td>
+<td>Amor</td>
+<td style="text-align: center;">asteroid</td>
+<td>Near-Earth asteroid orbits similar to that of 1221 Amor (1.017 au &lt; q &lt; 1.3 au)</td>
+</tr>
+<tr>
+<td style="text-align: center;">MCA</td>
+<td>Mars-crossing Asteroid</td>
+<td style="text-align: center;">asteroid</td>
+<td>Asteroids that cross the orbit of Mars constrained by (1.3 au &lt; q &lt; 1.666 au; a &lt; 3.2 au)</td>
+</tr>
+<tr>
+<td style="text-align: center;">IMB</td>
+<td>Inner Main-belt Asteroid</td>
+<td style="text-align: center;">asteroid</td>
+<td>Asteroids with orbital elements constrained by (a &lt; 2.0 au; q &gt; 1.666 au)</td>
+</tr>
+<tr>
+<td style="text-align: center;">MBA</td>
+<td>Main-belt Asteroid</td>
+<td style="text-align: center;">asteroid</td>
+<td>Asteroids with orbital elements constrained by (2.0 au &lt; a &lt; 3.2 au; q &gt; 1.666 au)</td>
+</tr>
+<tr>
+<td style="text-align: center;">OMB</td>
+<td>Outer Main-belt Asteroid</td>
+<td style="text-align: center;">asteroid</td>
+<td>Asteroids with orbital elements constrained by (3.2 au &lt; a &lt; 4.6 au)</td>
+</tr>
+<tr>
+<td style="text-align: center;">TJN</td>
+<td>Jupiter Trojan</td>
+<td style="text-align: center;">asteroid</td>
+<td>Asteroids trapped in Jupiter’s L4/L5 Lagrange points (4.6 au &lt; a &lt; 5.5 au; e &lt; 0.3)</td>
+</tr>
+<tr>
+<td style="text-align: center;">AST</td>
+<td>Asteroid</td>
+<td style="text-align: center;">asteroid</td>
+<td>Asteroid orbit not matching any defined orbit class</td>
+</tr>
+<tr>
+<td style="text-align: center;">CEN</td>
+<td>Centaur</td>
+<td style="text-align: center;"></td>
+<td>Objects with orbits between Jupiter and Neptune (5.5 au &lt; a &lt; 30.1 au)</td>
+</tr>
+<tr>
+<td style="text-align: center;">TNO</td>
+<td>TransNeptunian Object</td>
+<td style="text-align: center;"></td>
+<td>Objects with orbits outside Neptune (a &gt; 30.1 au)</td>
+</tr>
+<tr>
+<td style="text-align: center;">PAA</td>
+<td>Parabolic “Asteroid”</td>
+<td style="text-align: center;"></td>
+<td>“Asteroids” (objects other than comets) on parabolic orbits (e = 1.0)</td>
+</tr>
+<tr>
+<td style="text-align: center;">HYA</td>
+<td>Hyperbolic “Asteroid”</td>
+<td style="text-align: center;"></td>
+<td>“Asteroids” (objects other than comets) on hyperbolic orbits (e &gt; 1.0)</td>
+</tr>
+</tbody>
+</table>
+<p>Orbit class descriptions above use the following symbols to indicate orbit parameters:</p>
+<ul>
+<li>e - eccentricity</li>
+<li>q - perihelion distance</li>
+<li>a - semimajor axis</li>
+<li>Q - aphelion distance</li>
+<li>P - orbital period</li>
+<li>Tj - Jupiter Tisserand parameter</li>
+<li>aJ - Jupiter nominal semimajor axis</li>
+</ul>
+<h3 id="physical-parameter-fields">Physical Parameter Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th style="text-align: center;">Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H</td>
+<td style="text-align: center;">number</td>
+<td>absolute magnitude (magnitude at 1 au from the Sun and the observer)</td>
+</tr>
+<tr>
+<td>G</td>
+<td style="text-align: center;">number</td>
+<td>magnitude slope parameter used in the standard asteroid H/G magnitude law</td>
+</tr>
+<tr>
+<td>diameter</td>
+<td style="text-align: center;">number</td>
+<td>effective body diameter (km)</td>
+</tr>
+<tr>
+<td>extent</td>
+<td style="text-align: center;">string</td>
+<td>tri(or bi)-axial body dimensions (km)</td>
+</tr>
+<tr>
+<td>GM</td>
+<td style="text-align: center;">number</td>
+<td>mass expressed as a product of the mass “M” and gravitational constant “G” (km3/s2)</td>
+</tr>
+<tr>
+<td>density</td>
+<td style="text-align: center;">number</td>
+<td>bulk density (g/cm3)</td>
+</tr>
+<tr>
+<td>rot_per</td>
+<td style="text-align: center;">number</td>
+<td>body rotation period (synodic) (h)</td>
+</tr>
+<tr>
+<td>pole</td>
+<td style="text-align: center;">string</td>
+<td>spin-pole direction in R.A./Dec. (deg)</td>
+</tr>
+<tr>
+<td>albedo</td>
+<td style="text-align: center;">number</td>
+<td>geometric albedo</td>
+</tr>
+<tr>
+<td>BV</td>
+<td style="text-align: center;">number</td>
+<td>color index B-V</td>
+</tr>
+<tr>
+<td>UB</td>
+<td style="text-align: center;">number</td>
+<td>color index U-B</td>
+</tr>
+<tr>
+<td>IR</td>
+<td style="text-align: center;">number</td>
+<td>color index I-R</td>
+</tr>
+<tr>
+<td>spec_T</td>
+<td style="text-align: center;">string</td>
+<td>Tholen spectral taxonomic classification</td>
+</tr>
+<tr>
+<td>spec_B</td>
+<td style="text-align: center;">string</td>
+<td>SMASSII spectral taxonomic classification</td>
+</tr>
+</tbody>
+</table>
+<h3 id="orbit-determination-fields">Orbit Determination Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th style="text-align: center;">Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>condition_code</td>
+<td style="text-align: center;">string</td>
+<td>MPC “U” parameter: orbit uncertainty estimate 0-9, with 0 being good, and 9 being highly uncertain</td>
+</tr>
+<tr>
+<td>data_arc</td>
+<td style="text-align: center;">number</td>
+<td>number of days spanned by the observations used in the orbit determination</td>
+</tr>
+<tr>
+<td>n_obs_used</td>
+<td style="text-align: center;">number</td>
+<td>total number of observations of all types used in the orbit</td>
+</tr>
+<tr>
+<td>n_del_obs_used</td>
+<td style="text-align: center;">number</td>
+<td>number of radar delay observations used in the orbit</td>
+</tr>
+<tr>
+<td>n_dop_obs_used</td>
+<td style="text-align: center;">number</td>
+<td>number of radar Doppler observations used in the orbit</td>
+</tr>
+<tr>
+<td>two_body</td>
+<td style="text-align: center;">string</td>
+<td>flag (T or F) indicating a low-precision two-body dynamic model was used in the OD</td>
+</tr>
+</tbody>
+</table>
+<p>For more information, see:</p>
+<p>https://ssd-api.jpl.nasa.gov/doc/sbdb_filter.html
+https://ssd-api.jpl.nasa.gov/doc/sbdb_query.html</p>
+<h1 id="challenges">Challenges</h1>
+<p>Need to add</p>
+<h1 id="citations">Citations</h1>
+<p>Data Source: </p>
+<p>Solar System Dynamics. 29 June 2024. Small-Body Database Query. https://ssd.jpl.nasa.gov”</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ad660dcc.min.js"></script>
+      
+    
+  </body>
+</html>
