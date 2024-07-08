@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 from os import path
+import re
+from sklearn.preprocessing import scale, LabelEncoder
 
 def getData(fname=''):
     '''
@@ -24,41 +26,54 @@ def filterLowDataColumns(df, cutoff=0.2):
     df.drop(columns=badCols, inplace=True)
     return(df)
 
-def convertToDateTime( row, col):
+def EncodeCategoricalVariables( df, columns=[]):
     '''
-    Helper function for converting dates as done in existing code
+    Take in an array of categorical variables to encode and
+    return the df with the columns encoded
     '''
-    date_part, day_fraction = row[col].split('.')
-    date_dt = pd.to_datetime(date_part, format='%Y-%m-%d')
-    day_fraction_td = pd.to_timedelta(float('0.' + day_fraction) * 24, unit='hours')
-    return date_dt + day_fraction_td
+    for c in columns:
+        LE = LabelEncoder()
+        df[print(f'{c}_encoded')] = LE.fit_transform(df[c].astype(str))
+    return( df )
 
-def processData( df ):
+def preProcessData( df ):
     '''
     Take in a df and preprocess it
     '''
     # Filter the Low Data Columns
     df = filterLowDataColumns(df)
 
-    # # Convert Dates as Necessary
-    df['epoch_cal'] = df.apply(convertToDateTime, args=('epoch_cal',), axis=1)
-    df['tp_cal'] = df.apply(convertToDateTime, args=('tp_cal',), axis=1)
-    # df['first_obs_year'] = pd.to_numeric(df['first_obs'].apply(lambda x: re.split('-|/', x)[0]), errors='coerce').astype('Int64')
-    # df['first_obs_month'] = pd.to_numeric(df['first_obs'].apply(lambda x: re.split('-|/', x)[1]), errors='coerce').astype('Int64')
-    # df['last_obs_year'] = pd.to_numeric(df['last_obs'].apply(lambda x: re.split('-|/', x)[0]), errors='coerce').astype('Int64')
-    # df['last_obs_month'] = pd.to_numeric(df['last_obs'].apply(lambda x: re.split('-|/', x)[1]), errors='coerce').astype('Int64')
-    # date_jd = ['epoch','tp']
-    # df[date_jd] = df[date_jd].apply(pd.to_numeric)
+    # Drop Unecessary Columns: Likely we wont need these for training our algos
+    df.drop(
+        columns=[
+            'epoch_mjd', 'epoch', 'epoch_cal', 'first_obs', 'last_obs',  'producer'
+        ],
+        inplace=True
+    )
 
-    print(df.head())
+    # Encode Categorical Variables
+    cols = [ 'neo', 'pdes', 'pha', 'class', ]
     return(df)
 
-def getAndProcessData( fname ):
+def scaleColumns(df, columns=[], with_mean=True, with_std=True):
+    '''
+    Takes in a df and target columns (which should be numeric)
+    and scales them.  The mean flag will center everything about
+    the mean, the std flag will put it all in z-scores
+    '''
+    print(df[columns].head())
+    for c in columns:
+        df[c] = scale(df[c], with_mean=with_mean, with_std=with_std)
+    print(df[columns].head())
+    print(np.mean(df['H']))
+    return(df)
+
+def getAndPreProcessData( fname ):
     '''
     Take in a filename assumed to be a csv file
     load the data, process the data, return the 
     processed dataframe
     '''
     df = getData(fname)
-    df = processData(df)
+    df = preProcessData(df)
     return(df)
