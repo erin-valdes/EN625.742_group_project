@@ -23,6 +23,7 @@ def filterLowDataColumns(df, cutoff=0.2):
     number of rows, boot the column.
     '''
     badCols = df.columns[df.isna().sum() > len(df) * cutoff ]
+    # print(badCols)
     df.drop(columns=badCols, inplace=True)
     return(df)
 
@@ -30,10 +31,12 @@ def EncodeCategoricalVariables( df, columns=[]):
     '''
     Take in an array of categorical variables to encode and
     return the df with the columns encoded
+
+    FIXME:  We need to discern the encodings and return a dictionary of the encodings to map them back
     '''
     for c in columns:
         LE = LabelEncoder()
-        df[print(f'{c}_encoded')] = LE.fit_transform(df[c].astype(str))
+        df[ c + '_encoded' ] = LE.fit_transform(df[c].astype(str))
     return( df )
 
 def preProcessData( df ):
@@ -53,6 +56,7 @@ def preProcessData( df ):
 
     # Encode Categorical Variables
     cols = [ 'neo', 'pdes', 'pha', 'class', ]
+    df = EncodeCategoricalVariables(df, cols)
     return(df)
 
 def scaleColumns(df, columns=[], with_mean=True, with_std=True):
@@ -61,11 +65,9 @@ def scaleColumns(df, columns=[], with_mean=True, with_std=True):
     and scales them.  The mean flag will center everything about
     the mean, the std flag will put it all in z-scores
     '''
-    print(df[columns].head())
     for c in columns:
         df[c] = scale(df[c], with_mean=with_mean, with_std=with_std)
-    print(df[columns].head())
-    print(np.mean(df['H']))
+
     return(df)
 
 def getAndPreProcessData( fname ):
