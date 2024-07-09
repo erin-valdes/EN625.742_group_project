@@ -50,11 +50,47 @@ def main():
     # Plotting Scatter Plots Color Coded by PHA Y or N
     PHA_Y = df[df['pha'] == 'Y']
     PHA_N = df[df['pha'] == 'N']
-    x1 = PHA_Y['e'].to_numpy()
+
+
+    '''
+    This combo of eccentricity and absolute magnitude seem to exhibit promising results for
+    a classification exercise.... logistic or QDA
+    '''
+    # x1 = PHA_Y['e'].to_numpy()
+    # y1 = PHA_Y['H'].to_numpy()
+    # x2 = PHA_N['e'].to_numpy()
+    # y2 = PHA_N['H'].to_numpy()
+    # charts.ScatterPlot2d(x1, y1, x2, y2, 'PHA: Y', 'PHA: N', '', 'e', 'H' )
+
+    '''
+    This combo of eccentricity and the MOID for Jupiter also seems to exhibit non-linear results
+    for classification
+    '''
+    # x1 = PHA_Y['e'].to_numpy()
+    # y1 = PHA_Y['moid_jup'].to_numpy()
+    # x2 = PHA_N['e'].to_numpy()
+    # y2 = PHA_N['moid_jup'].to_numpy()
+    # charts.ScatterPlot2d(x1, y1, x2, y2, 'PHA: Y', 'PHA: N', '', 'e', 'moid_jup' )
+
+    '''
+    Theres an interesting almost sinusoidal pattern here and all the PHAs appear below the line
+    '''
+    # x1 = PHA_Y['w'].to_numpy()
+    # y1 = PHA_Y['q'].to_numpy()
+    # x2 = PHA_N['w'].to_numpy()
+    # y2 = PHA_N['q'].to_numpy()
+    # charts.ScatterPlot2d(x1, y1, x2, y2, 'PHA: Y', 'PHA: N', '', 'w', 'q' )
+
+
+    x1 = PHA_Y['w'].to_numpy()
     y1 = PHA_Y['q'].to_numpy()
-    x2 = PHA_N['e'].to_numpy()
-    y2 = PHA_N['e'].to_numpy()
-    charts.ScatterPlot2d(x1, y1, x2, y2, 'e', 'q', '', 'PHA: Y', 'PHA: N' )
+    z1 = PHA_Y['H'].to_numpy()
+    x2 = PHA_N['w'].to_numpy()
+    y2 = PHA_N['q'].to_numpy()
+    z2 = PHA_N['H'].to_numpy()
+    charts.ScatterPlot3d(x1, y1, z1, x2, y2, z2, 'PHA: Y', 'PHA: N', '', 'w', 'q', 'H')
+
+
     return()
 
 if __name__ == '__main__':

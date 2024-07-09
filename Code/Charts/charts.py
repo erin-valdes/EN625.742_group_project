@@ -1,4 +1,6 @@
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
 
 
 def ScatterPlot2d(x1, y1, x2, y2, lab1, lab2, title='', xlabel='', ylabel=''):
@@ -27,6 +29,43 @@ def ScatterPlot2d(x1, y1, x2, y2, lab1, lab2, title='', xlabel='', ylabel=''):
     # Add a legend
     plt.legend()
     
-    # Show the plot
-    fname = f'scatter_{lab1}_{lab2}.png'
+    # Save the plot
+    fname = f'scatter_{xlabel}_{ylabel}.png'
     plt.savefig( fname )
+
+def ScatterPlot3d(x1, y1, z1, x2, y2, z2, labels1, labels2, title='', xlabel='', ylabel='', zlabel=''):
+    """
+    Plots three sets of data on the same 3D scatter plot with different colors and 50% transparency.
+    
+    Parameters:
+    x1, y1, z1: numpy arrays of x, y, z values for the first dataset
+    x2, y2, z2: numpy arrays of x, y, z values for the second dataset
+    x3, y3, z3: numpy arrays of x, y, z values for the third dataset
+    labels1: label for the first dataset
+    labels2: label for the second dataset
+    labels3: label for the third dataset
+    title: title of the plot (default is "3D Scatter Plot")
+    xlabel: label for the x-axis (default is "X-axis")
+    ylabel: label for the y-axis (default is "Y-axis")
+    zlabel: label for the z-axis (default is "Z-axis")
+    """
+    # Create a 3D scatter plot with 50% transparency
+    fig = plt.figure(figsize=(10, 8))
+    ax = fig.add_subplot(111, projection='3d')
+    
+    ax.scatter(x1, y1, z1, c='blue', label=labels1, alpha=0.5)
+    ax.scatter(x2, y2, z2, c='red', label=labels2, alpha=0.5)
+    
+    # Add titles and labels
+    ax.set_title(title)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    ax.set_zlabel(zlabel)
+    
+    # Add a legend
+    ax.legend()
+
+    # Save the plot
+    fname = f'scatter_{xlabel}_{ylabel}_{zlabel}.png'
+    plt.savefig( fname )
+ 
