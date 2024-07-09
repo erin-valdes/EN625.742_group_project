@@ -56,42 +56,52 @@ def main():
     This combo of eccentricity and absolute magnitude seem to exhibit promising results for
     a classification exercise.... logistic or QDA
     '''
-    x1 = PHA_Y['e'].to_numpy()
-    y1 = PHA_Y['H'].to_numpy()
-    x2 = PHA_N['e'].to_numpy()
-    y2 = PHA_N['H'].to_numpy()
-    charts.ScatterPlot2d(x1, y1, x2, y2, 'PHA: Y', 'PHA: N', '', 'Eccentricity', 'Absolute Magnitude', 'scatter_e_H.png' )
+    # x1 = PHA_Y['e'].to_numpy()
+    # y1 = PHA_Y['H'].to_numpy()
+    # x2 = PHA_N['e'].to_numpy()
+    # y2 = PHA_N['H'].to_numpy()
+    # charts.ScatterPlot2d(x1, y1, x2, y2, 'PHA: Y', 'PHA: N', '', 'Eccentricity', 'Absolute Magnitude', 'scatter_e_H.png' )
 
     '''
     This combo of eccentricity and the MOID for Jupiter also seems to exhibit non-linear results
     for classification
     '''
-    x1 = PHA_Y['e'].to_numpy()
-    y1 = PHA_Y['moid_jup'].to_numpy()
-    x2 = PHA_N['e'].to_numpy()
-    y2 = PHA_N['moid_jup'].to_numpy()
-    charts.ScatterPlot2d(x1, y1, x2, y2, 'PHA: Y', 'PHA: N', '', 'Eccentricity', 'Jupiter Minimum Orbit Intersection Dist (au)', 'scatter_e_moid_jup.png' )
+    # x1 = PHA_Y['e'].to_numpy()
+    # y1 = PHA_Y['moid_jup'].to_numpy()
+    # x2 = PHA_N['e'].to_numpy()
+    # y2 = PHA_N['moid_jup'].to_numpy()
+    # charts.ScatterPlot2d(x1, y1, x2, y2, 'PHA: Y', 'PHA: N', '', 'Eccentricity', 'Jupiter Minimum Orbit Intersection Dist (au)', 'scatter_e_moid_jup.png' )
 
     '''
     Theres an interesting almost sinusoidal pattern here and all the PHAs appear below the line
     '''
-    x1 = PHA_Y['w'].to_numpy()
-    y1 = PHA_Y['q'].to_numpy()
-    x2 = PHA_N['w'].to_numpy()
-    y2 = PHA_N['q'].to_numpy()
-    charts.ScatterPlot2d(x1, y1, x2, y2, 'PHA: Y', 'PHA: N', '', 'Argument of Perihelion (deg)', 'Perihelion Distance (au)', 'scatter_w_q.png' )
+    # x1 = PHA_Y['w'].to_numpy()
+    # y1 = PHA_Y['q'].to_numpy()
+    # x2 = PHA_N['w'].to_numpy()
+    # y2 = PHA_N['q'].to_numpy()
+    # charts.ScatterPlot2d(x1, y1, x2, y2, 'PHA: Y', 'PHA: N', '', 'Argument of Perihelion (deg)', 'Perihelion Distance (au)', 'scatter_w_q.png' )
 
+    '''
+    Theres an interesting almost sinusoidal pattern here and all the PHAs appear below the line
+    '''
+    # x1 = PHA_Y['H'].to_numpy()
+    # y1 = PHA_Y['moid_jup'].to_numpy()
+    # x2 = PHA_N['H'].to_numpy()
+    # y2 = PHA_N['moid_jup'].to_numpy()
+    # charts.ScatterPlot2d(x1, y1, x2, y2, 'PHA: Y', 'PHA: N', '', 'Jupiter Minimum Orbit Intersection Dist (au)', 'Absolute Magnitude', 'scatter_H_moid_jup.png' )
+
+    
 
     '''
     Initial Take at a 3d Cluster
     '''
-    x1 = PHA_Y['t_jup'].to_numpy()
-    y1 = PHA_Y['moid_jup'].to_numpy()
-    z1 = PHA_Y['e'].to_numpy()
-    x2 = PHA_N['t_jup'].to_numpy()
-    y2 = PHA_N['moid_jup'].to_numpy()
-    z2 = PHA_N['e'].to_numpy()
-    charts.ScatterPlot3d(x1, y1, z1, x2, y2, z2, 'PHA: Y', 'PHA: N', '', 'Jupiter Tisserand Parameter', 'Jupiter Minimum Orbit Intersection Dist (au)', 'Eccentricity', 'scatter_t_jup_moid_jup_e.png')
+    # x1 = PHA_Y['H'].to_numpy()
+    # y1 = PHA_Y['moid_jup'].to_numpy()
+    # z1 = PHA_Y['e'].to_numpy()
+    # x2 = PHA_N['H'].to_numpy()
+    # y2 = PHA_N['moid_jup'].to_numpy()
+    # z2 = PHA_N['e'].to_numpy()
+    # charts.ScatterPlot3d(x1, y1, z1, x2, y2, z2, 'PHA: Y', 'PHA: N', '', 'Absolute Magnitude', 'Jupiter Minimum Orbit Intersection Dist (au)', 'Eccentricity', 'scatter_H_moid_jup_e.png')
 
 
     return()
