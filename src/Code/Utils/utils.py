@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from os import path
 import re
-from sklearn.preprocessing import scale, LabelEncoder
+from sklearn.preprocessing import scale, LabelEncoder, TargetEncoder
 
 def getData(fname=''):
     '''
@@ -35,8 +35,9 @@ def EncodeCategoricalVariables( df, columns=[]):
     FIXME:  We need to discern the encodings and return a dictionary of the encodings to map them back
     '''
     for c in columns:
-        LE = LabelEncoder()
-        df[ c + '_encoded' ] = LE.fit_transform(df[c].astype(str))
+        # LE = LabelEncoder()
+        TE = TargetEncoder()
+        df[ c + '_encoded' ] = TE.fit_transform(df[c].astype(str))
     return( df )
 
 def preProcessData( df ):
