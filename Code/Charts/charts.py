@@ -66,4 +66,30 @@ def ScatterPlot3d(x1, y1, z1, x2, y2, z2, labels1, labels2, title='', xlabel='',
 
     # Save the plot
     plt.savefig( fname )
+
+def ClustedPlot3d(x, y, z, title='', xlab='', ylab='', zlab='', fname=''):
+    '''
+    Plots a clusted of 3d data
+    
+    Parameters:
+    x, y, z: numpy arrays of x, y, z values for the dataset
+    title: title of the plot (default is "3D Scatter Plot")
+    xlabel: label for the x-axis (default is "X-axis")
+    ylabel: label for the y-axis (default is "Y-axis")
+    zlabel: label for the z-axis (default is "Z-axis")
+    '''
+    # Create a 3D scatter plot with 50% transparency
+    fig = plt.figure(figsize=(10, 8))
+    ax = fig.add_subplot(111, projection='3d')
+    
+    ax.scatter(x, y, z, c='red', alpha=0.25)
+    
+    # Add titles and labels
+    ax.set_title(title)
+    ax.set_xlabel(xlab)
+    ax.set_ylabel(ylab)
+    ax.set_zlabel(zlab)
+    
+    # Save the plot
+    plt.savefig( fname )
  
