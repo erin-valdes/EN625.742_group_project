@@ -1,11 +1,15 @@
 from os import getcwd
 from os import path
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import scale
 from pandas.plotting import scatter_matrix
 from Charts import charts
 from Utils import utils
 from Models import models
+from sklearn.linear_model import LogisticRegression
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+from sklearn.svm import SVC
+from sklearn.model_selection import train_test_split
 
 # FUNCTIONS TO PLOT POTENTIAL RELATIONSHIPS
 def Plotting( df ):
@@ -88,7 +92,6 @@ def Plotting( df ):
     z = PHA_Y['e'].to_numpy()
     charts.ClustedPlot3d(x, y, z, '', 'Longitude of the Ascending Node (deg)', 'Argument of Perihelion (deg)', 'Eccentricity', 'cluster_om_w_e.png')
 
-
 # FUNCTIONS FOR MODELLING RELATIONSHIPS TO CLASSIFY PHA
 def AnalysisV1( df ):
     '''
@@ -99,12 +102,75 @@ def AnalysisV1( df ):
         
         X is a 2xN matrix where the inputs are e and H
         y is the response variable which is PHA y/n
+
+        FIXME: Lets store all the results so we can plot them well for comparison
     '''    
-    X = df[ ['e', 'H'] ]
-    y = df[ ['pha_encoded'] ]
-    print(f'{X.head()}\n{y.head()}')
-    [avg, std, Logistic] = models.Logistic(X, y)
-    
+    print( 'Eccentricity vs. Absolute Magnitude:' )
+    # Randomly Split the Data
+    [Train, Test] = train_test_split( df, train_size=0.8 )
+
+    # Set Fields
+    X           = [ 'e', 'H']
+    y           = [ 'pha_encoded' ]
+
+    model       = models.Model(Train, Test, X, y, LogisticRegression())
+    [mu, sigma] = model.cross_validate() 
+    print(f'Logistic Regression Cross Validated Performance: {mu}\n') 
+
+    model       = models.Model(Train, Test, X, y, LinearDiscriminantAnalysis())
+    [mu, sigma] = model.cross_validate() 
+    print(f'LDA Cross Validated Performance: {mu}\n') 
+
+    model       = models.Model(Train, Test, X, y, SVC(kernel='rbf'))
+    [mu, sigma] = model.cross_validate() 
+    print(f'Gaussian SVM Cross Validated Performance: {mu}\n') 
+    return()
+
+def AnalysisV2(df):
+    '''
+    Relationship: Eccentricity (e) vs. Jupiter MOID (moid_jup)
+        -   QDA: See if a quadratic decision boundary can separate data better than a linear
+        -   SVM (with Kernels):  See if higher dimensional spaces can separate better than a QDA
+    '''
+    print( 'Eccentricity vs. Jupiter MOID' )
+    # Randomly Split the Data
+    [Train, Test] = train_test_split( df, train_size=0.8 )
+
+    # Set Fields
+    X           = [ 'e', 'moid_jup']
+    y           = [ 'pha_encoded' ]
+
+    model       = models.Model(Train, Test, X, y, QuadraticDiscriminantAnalysis())
+    [mu, sigma] = model.cross_validate() 
+    print(f'QDA Cross Validated Performance: {mu}\n') 
+
+    model       = models.Model(Train, Test, X, y, SVC(kernel='poly'))
+    [mu, sigma] = model.cross_validate() 
+    print(f'SVM w Polynomial Kernel Cross Validated Performance: {mu}\n') 
+
+    model       = models.Model(Train, Test, X, y, SVC(kernel='rbf'))
+    [mu, sigma] = model.cross_validate() 
+    print(f'SVM w Gaussian Kernel Cross Validated Performance: {mu}\n') 
+
+    return()
+
+def AnalysisV3(df):
+    '''
+    Relationship: Arg of Perihelion (w) vs. Perihelion Distance (q)
+        -   SVM with Gaussian Kernel
+        -   SVM with a periodic kernel 
+    '''
+    print( 'Argument of Perihelion vs. Perihelion Distance' )
+    # Randomly Split the Data
+    [Train, Test] = train_test_split( df, train_size=0.8 )
+
+    # Set Fields
+    X           = [ 'w', 'q']
+    y           = [ 'pha_encoded' ]
+
+    model       = models.Model(Train, Test, X, y, SVC(kernel='rbf'))
+    [mu, sigma] = model.cross_validate() 
+    print(f'SVM w Gaussian Kernel Cross Validated Performance: {mu}\n') 
     return()
 
 
@@ -128,30 +194,12 @@ def main():
     df = df.sample(frac=0.1)
     df.dropna( inplace=True)
 
-    print(df.head())
-
     # Create and Save Pre-analysis plots
     # Plotting(df)
 
-
-    '''
-    Here I detail what boudnaries and algorithms I actually want to test and how I'd like to test them.  For every model we implement, 
-    assume 10-fold cross validation is used.  
-
-    Relationship: Eccentricity (e) vs. Absolute Magnitude (H)
-        -   LDA: Use a linear decision boundary where we assume equal covariances to test if we can separate the data
-        -   Logistic Regression: Use a linear decision boundary with lighter assumptions than LDA to check if we can separate the data better
-        -   SVM (with Kernels): Test an SVM with varying Kernels.  Maybe in higher dimensions we have more easily separable data
-
-    Relationship: Eccentricity (v) vs. Jupiter MOID (moid_jup_)
-        -   QDA: See if a quadratic decision boundary can separate data better than a linear
-        -   SVM (with Kernels):  See if higher dimensional spaces can separate better than a QDA
-    
-    Relationship: Arg of Perihelion (w) vs. Perihelion Distance (q)
-        -   SVM with Gaussian Kernel
-        -   SVM with a periodic kernel 
-    '''
     AnalysisV1(df)
+    AnalysisV2(df)
+    AnalysisV3(df)
 
     return()
 

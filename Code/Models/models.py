@@ -18,7 +18,7 @@ class Model():
             y:      an array of the response variable for example ['pha']
 
         FIXME:  If i've already fit a model and THEN i cross validate the same
-        instance, does it barf? Does that affect fit at all?
+        instance, does it barf? Does that affect fit at all? maybe add one more field for the model spec, separate from the fit model?
         '''
         self.model  = model # Model to train and predict with
         self.Train  = Train # Train Dataset
@@ -27,7 +27,6 @@ class Model():
         self.y      = y     # Response Columns
         self.y_hat  = None  # Predicted Values
         self.prepData()
-
     
     def prepData(self):
         '''
@@ -36,7 +35,6 @@ class Model():
         '''
         # Concatenate Explanatory and response variables
         fields = np.concatenate( [self.X, self.y] )
-        print(fields)
         # Filter data
         self.Train  = self.Train[ fields ]
         self.Test   = self.Test[ fields ]
@@ -46,7 +44,7 @@ class Model():
         Fit the instance's model with input data
         '''
         X = self.Train[self.X]
-        y = self.Train[self.y]
+        y = column_or_1d(self.Train[self.y])
         self.model = self.model.fit(X, column_or_1d(y))
     
     def cross_validate(self, k=10):
@@ -57,8 +55,9 @@ class Model():
             k: the number of folds, default 10
         '''
         X = self.Train[self.X]
-        y = self.Train[self.y]
+        y = column_or_1d(self.Train[self.y])
         scores = cross_val_score(self.model, X, y, cv=k)
+        return( [np.mean(scores), np.std(scores) ] )
     
     def predict(self):
         '''
@@ -67,79 +66,14 @@ class Model():
         '''
         X = self.Test[ self.X ]
         self.y_hat = self.model.predict()
-
-
-
-def Logistic(X, y):
-    '''
-    Takes in the explanatory (X) and response variables (y).
-    runs 10 fold CV for a Logistic Regression Model, and then 
-    trains a Logistic Regression Model.
-
-    Returns the array of cross validation scores, and a model in an array
-    [avg score, std dev,  model]
-    '''
-    # Fit the model
-    y = column_or_1d(y)
-    model = LogisticRegression().fit(X, y)
-
-    # 10-fold CV
-    scores  = cross_val_score(LogisticRegression(), X, y, cv=10)
-    avg     = np.mean(scores)
-    std     = np.std(scores)
-
-    return( [avg, std, model] )
-
-def LDA(X, y):
-    '''
-    Takes in the explanatory (X) and response variables (y).
-    runs 10 fold CV for an LDA Model, and then trains a  Model. 
-    '''
-    # Fit the model
-    model   = LinearDiscriminantAnalysis().fit(X, y)
-
-    # 10-fold CV
-    scores  = cross_val_score(LinearDiscriminantAnalysis(), X, y, cv=10)
-    avg     = np.mean(scores)
-    std     = np.std(scores)
-
-    return( [avg, std, model] )
-
-def QDA(X, y):
-    '''
-    Takes in the explanatory (X) and response variables (y).
-    runs 10 fold CV for a QDA Model, and then trains a Model.
-    '''
-    # Fit the model
-    model   = QuadraticDiscriminantAnalysis().fit(X, y)
-
-    # 10-fold CV
-    scores  = cross_val_score(QuadraticDiscriminantAnalysis(), X, y, cv=10)
-    avg     = np.mean(scores)
-    std     = np.std(scores)
-
-    return( [avg, std, model] )
-
-def SVM( X, y, kernel='linear'):
-    '''
-    Takes in the explanatory (X), response variables (y), and kernel.
-    runs 10 fold CV for an SVM Model, and then trains a Model.
-
-    Inputs:
-        X:      explanatory vars
-        y:      response vars
-        kernel: Kernel to use for the analysis
-    '''
-    # Fit the model
-    clf     = SVC( kernel=kernel )
-    model   = SVC( kernel=kernel ).fit(X, y) 
-
-    # 10-fold CV
-    scores  = cross_val_score(clf, X, y, cv=10)
-    avg     = np.mean(scores)
-    std     = np.std(scores)
-    return( [avg, std, model] )
     
+    def accuracy(self):
+        '''
+        Look at our classified y values, compare them to 
+        '''
+        x = np.absolute(self.y_hat - self.y) # since the array should be binary, any differences in predictions will show up as 1 or -1
+        return( sum(x) / len(x) )
+
 
 if __name__ == '__main__':
     pass

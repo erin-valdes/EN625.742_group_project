@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 from os import path
-import re
 from sklearn.preprocessing import scale, LabelEncoder
 
 def getData(fname=''):
@@ -10,7 +9,7 @@ def getData(fname=''):
     data into a pandas df and return the df
     '''
     if path.isfile(fname):
-        return( pd.read_csv(fname) )
+        return( pd.read_csv(fname, low_memory=False) )
     else:
         print( 'ERROR: Bad file, check your filename' )
         return( None )
