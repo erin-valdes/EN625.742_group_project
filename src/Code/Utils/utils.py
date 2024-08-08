@@ -2,7 +2,8 @@ import pandas as pd
 import numpy as np
 from os import path
 import re
-from sklearn.preprocessing import scale, LabelEncoder, TargetEncoder
+from sklearn.preprocessing import scale, LabelEncoder
+import category_encoders as ce
 
 def getData(fname=''):
     '''
@@ -27,17 +28,18 @@ def filterLowDataColumns(df, cutoff=0.2):
     df.drop(columns=badCols, inplace=True)
     return(df)
 
-def EncodeCategoricalVariables( df, columns=[]):
+def EncodeCategoricalVariables( df, target_col, cat_columns=[]):
     '''
     Take in an array of categorical variables to encode and
     return the df with the columns encoded
 
     FIXME:  We need to discern the encodings and return a dictionary of the encodings to map them back
     '''
-    for c in columns:
+    for c in cat_columns:
         # LE = LabelEncoder()
-        TE = TargetEncoder()
-        df[ c + '_encoded' ] = TE.fit_transform(df[c].astype(str))
+        # use catboost encoder
+        CE = ce.CatBoostEncoder()
+        df[ c + '_encoded' ] = CE.fit_transform( df[c], df[target_col] )
     return( df )
 
 def preProcessData( df ):
